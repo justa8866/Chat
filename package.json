@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prepare": "husky install",
-    "lint": "eslint *.{json,js,ts,tsx} "
+    "lint": "eslint ./ --fix"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -38,8 +38,11 @@
     }
   },
   "lint-staged": {
-    "*.{json,js,ts,tsx}": [
-      "eslint --fix"
+    "*.{ts,tsx}": [
+      "eslint *.{ts,tsx} --quiet --fix"
     ]
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   }
 }
