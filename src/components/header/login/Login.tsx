@@ -7,16 +7,31 @@ import {
   LoginButtonGoogle,
   LoginButtonFacebook,
 } from "./Login.style";
+import "firebase/app";
+import { auth } from "../../../Firebase/firebase";
+import {
+  AuthProvider,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
-const login = () => {
+const providerGoogle = new GoogleAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
+
+const Login = () => {
+  const signWith= async (provider: AuthProvider) => {
+    await signInWithPopup(auth, provider);
+  };
+
   return (
     <LoginPage>
       <LoginCard>
         <Text>Welcome to chat</Text>
-        <LoginButtonGoogle>
+        <LoginButtonGoogle onClick={() => signWith(providerGoogle)}>
           <GoogleOutlined /> Sign in with Google
         </LoginButtonGoogle>
-        <LoginButtonFacebook>
+        <LoginButtonFacebook  onClick={() => signWith(providerFacebook)}>
           <FacebookOutlined /> Sign In with Facebook
         </LoginButtonFacebook>
       </LoginCard>
@@ -24,4 +39,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
